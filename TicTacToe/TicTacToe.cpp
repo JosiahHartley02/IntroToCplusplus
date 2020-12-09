@@ -138,8 +138,11 @@ void draw(char grid[3][3], char name1[], char name2[])
 
 void update(char grid[3][3], char name1[], char name2[], bool p1Winner, bool p2Winner)
 {
-	draw(grid, name1, name2);
+	if (p2Winner == false)
+	{
+		draw(grid, name1, name2);
 		//Player Ones Turn
+		bool winner = false;
 		bool p1Loop = true;
 		int p1Position = 0;
 		std::cout << name1 << " please choose a spot to place your piece [X]" << std::endl;
@@ -170,17 +173,20 @@ void update(char grid[3][3], char name1[], char name2[], bool p1Winner, bool p2W
 			}
 		}
 		char symbol = 'X';
-		grid[row][column] = symbol;		
+		grid[row][column] = symbol;
 
 		if (checkWinner(grid, symbol))
 		{
 			p1Winner = true;
 		}
+	}
+	if (p1Winner == false)
+	{
 		draw(grid, name1, name2);
 		//Player Twos Turn
 		bool p2Loop = true;
 		int p2Position = 0;
-		std::cout << name1 << " please choose a spot to place your piece [X]" << std::endl;
+		std::cout << name2 << " please choose a spot to place your piece [O]" << std::endl;
 		while (p2Loop == true)
 		{
 			p2Position = getNumber();
@@ -194,8 +200,8 @@ void update(char grid[3][3], char name1[], char name2[], bool p1Winner, bool p2W
 				std::cout << "Please Select A Valid Spot" << std::endl;
 			}
 		}
-		column = -1;
-		row = 0;
+		int column = -1;
+		int row = 0;
 		for (int i = 0; i < p2Position; i++)
 		{
 			//increments column value to move right across array
@@ -207,28 +213,39 @@ void update(char grid[3][3], char name1[], char name2[], bool p1Winner, bool p2W
 				row++;
 			}
 		}
-		symbol = 'O';
+		char symbol = 'O';
 		grid[row][column] = symbol;
 
 		if (checkWinner(grid, symbol))
 		{
 			p2Winner = true;
 		}
-	
+	}
 }
 
 int main()
 {
-	bool gameOver = false;
 	bool p1Won = false;
 	bool p2Won = false;
     char playerOnesName[5] = { 'N','A','M','E','!' };
     char playerTwosName[5] = { 'N','A','M','E','!' };
 	char grid[3][3] = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
 	start(playerOnesName, playerTwosName);
-	while (gameOver == false)
+	while (p1Won == false && p2Won == false)
 	{
 		update(grid,playerOnesName, playerTwosName,p1Won,p2Won);
+		if (p1Won)
+		{
+			system("cls");
+			std::cout << "Congratulations " << playerOnesName << " !" << std::endl;
+			system("pause");
+		}
+		else if (p2Won)
+		{
+			system("cls");
+			std::cout << "Congratulations " << playerTwosName << " !" << std::endl;
+			system("pause");
+		}
 		draw(grid, playerOnesName, playerTwosName);
 	}
 }
