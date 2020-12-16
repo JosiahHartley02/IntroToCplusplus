@@ -14,6 +14,7 @@ private :
 	void end();
 private:
 	bool m_gameOver;
+	int level = 0;
 	Character m_player1;
-	Character m_player2;
+	Character* player1 = &m_player1;
 };
