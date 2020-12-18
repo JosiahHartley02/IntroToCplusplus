@@ -14,7 +14,7 @@ public:
 
 	void setLetter(int index, char letter)
 	{
-		if(index < 10 && index > 0)
+		if(index < 10 && index >= 0)
 			name[index] = letter; 
 	}
 	char name[10] = { ' ',' ',' ',' ',' '};

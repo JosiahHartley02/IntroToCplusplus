@@ -152,7 +152,7 @@ void Game::start()
 
 		for (int i = 0; i < 10; i++)
 		{
-			m_player1->setLetter(i, newName[i - 1]);
+			m_player1->setLetter(i, newName[i]);
 		}
 	}
 	
