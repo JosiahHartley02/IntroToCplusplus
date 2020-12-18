@@ -22,7 +22,9 @@ public:
 private:
 	float m_health;
 	float m_damage;
+	int m_level;
 public:
+	int* level = &m_level;
 	float* health = &m_health;
 	float* damage = &m_damage;
 
