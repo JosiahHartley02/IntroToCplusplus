@@ -117,6 +117,7 @@ void Game::start()
 	{
 		std::cout << "Would You Like To Load your old save? Enter Y or N" << std::endl;
 		load = getYesNo();
+		system("cls");
 	}
 	if (load)
 	{
