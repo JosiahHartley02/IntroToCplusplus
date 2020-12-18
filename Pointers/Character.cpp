@@ -2,14 +2,14 @@
 
 Character::Character()
 {
-	m_health = 100;
-	m_damage = 10;
+	*health = 100;
+	*damage = 10;
 }
 
-Character::Character(float health, float damage)
+Character::Character(float healthVal, float damageVal)
 {
-	m_health = health;
-	m_damage = damage;
+	*health = healthVal;
+	*damage = damageVal;
 }
 
 Character::Character(float health, float damage, int enemy)
@@ -42,7 +42,7 @@ Character::Character(float health, float damage, int enemy)
 
 void Character::attack(Character* other)
 {
-	other->takeDamage(getDamage());
+	other->takeDamage(*damage);
 	
 }
 

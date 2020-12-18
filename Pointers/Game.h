@@ -15,6 +15,6 @@ private :
 private:
 	bool m_gameOver;
 	int level = 0;
-	Character m_player1;
-	Character* player1 = &m_player1;
+	Character* m_player1;
+	Character* m_enemy[3];
 };
