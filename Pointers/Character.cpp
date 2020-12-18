@@ -24,6 +24,8 @@ Character::Character(float health, float damage, int enemy)
 		name[2] = 'o';
 		name[3] = 'l';
 		name[4] = 'l';
+		for (int i = 5; i < 10; i++)
+			name[i] = 0;
 		return;
 	case 2:
 		name[0] = 'O';

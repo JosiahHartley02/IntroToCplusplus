@@ -17,7 +17,7 @@ public:
 		if(index < 10 && index >= 0)
 			name[index] = letter; 
 	}
-	char name[10] = { ' ',' ',' ',' ',' '};
+	char name[10] = { 0,0,0,0,0,0,0,0,0,0};
 
 private:
 	float m_health;

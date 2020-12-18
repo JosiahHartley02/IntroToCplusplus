@@ -174,7 +174,7 @@ void Game::update()
 	//Loops in update untill either character's health value is equal to or less than 0
 	while (*m_player1->health > 0 && *m_enemy[level]->health > 0)
 	{
-		//use this to prevent the enemy from sucker punch when you save
+		//used this to prevent the enemy from sucker punching player when they save
 		bool enemyStunned = false;
 		draw();
 		//Player One Gets a Turn if they're alive
