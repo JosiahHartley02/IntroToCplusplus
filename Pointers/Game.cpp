@@ -4,28 +4,37 @@
 
 bool getYesNo()
 {
+	//Allocates answer spot
 	char answer[5] = { ' ' };
+	//until the answer is something worth something, repeat
 	while (answer[0] != 'y' && answer[0] != 'Y' && answer[0] != 'n' && answer[0] !='N')
 	{
 		std::cin >> answer;
 	}
+	//if the answer was yes return a true
 	if (answer[0] == 'y' || answer[0] == 'Y')
 		return true;
+	//if it was anything else and made it this far its safe to assume it was n or false
 	return false;
 
 }
 
 int attackSkipSave()
 {
-	char answer[2] = { ' ' };
+	//Allocate an answer spot
+	char answer[5] = { ' ' };
+	//Until the answer is something valueable repeat getting answer
 	while (answer[0] != 'y' && answer[0] != 'Y' && answer[0] != 'n' && answer[0] != 'N' && answer[0] != 's' && answer[0] != 'S')
 	{
 		std::cin >> answer;
 	}
+	//if it was yes return 1 or true
 	if (answer[0] == 'y' || answer[0] == 'Y')
 		return 1;
+	//if it was a no return 0 or false
 	else if (answer[0] == 'n' || answer[0] == 'N')
 		return 0;
+	//if it was anything else its safe to assume it was an S so returns a 2
 	else
 		return 2;
 
@@ -34,26 +43,35 @@ int attackSkipSave()
 
 int saveData(Character* player)
 {
+	//new instance of file stream
 	std::fstream file;
+	//open the file
 	file.open("savedData.txt", std::ios::out);
+	//if file doesnt open return error code -1
 	if (!file.is_open())
-		return 3;
+		return -1;
+	//save important data line by line
 	file << *player->health << std::endl;
 	file << *player->damage << std::endl;
 	file << *player->level << std::endl;
 	for (int i = 0; i < 10; i++)
 		file << player->name[i];
-
+	//always close file after opening
 	file.close();
+	//returns a true, it did save
 	return 1;
 }
 
 int loadData(Character* player)
 {
+	//new instance of file stream
 	std::fstream file;
+	//open the file 
 	file.open("savedData.txt", std::ios::in);
+	//test to see if the file has opened if not return error code -2
 	if (!file.is_open())
-		return -1;
+		return -2;
+	//overwrite current m_player1 values and current level
 	file >> *player->health;
 	file >> *player->damage;
 	file >> *player->level;
@@ -153,8 +171,10 @@ void Game::draw()
 
 void Game::update()
 {
+	//Loops in update untill either character's health value is equal to or less than 0
 	while (*m_player1->health > 0 && *m_enemy[level]->health > 0)
 	{
+		//use this to prevent the enemy from sucker punch when you save
 		bool enemyStunned = false;
 		draw();
 		//Player One Gets a Turn if they're alive
