@@ -11,14 +11,6 @@ public:
 
 	/*float getDamage() { return damage; }
 	float getHealth() { return health; }*/
-
-	void setLetter(int index, char letter)
-	{
-		if(index < 10 && index >= 0)
-			name[index] = letter; 
-	}
-	char name[10] = { 0,0,0,0,0,0,0,0,0,0};
-
 private:
 	float m_health;
 	float m_damage;
@@ -27,5 +19,6 @@ public:
 	int* exp = &m_exp;
 	float* health = &m_health;
 	float* damage = &m_damage;
+	char name[10];
 };
 

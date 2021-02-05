@@ -83,25 +83,16 @@ int attackSkipSave()
 //New Save and Load in Binary
 int Game::saveData()
 {
-	std::cout << "Line 86 Game.cpp" << std::endl;
-	system("pause");
-	//declare and instance of file stream
 	std::fstream file;
 	//open save data
 	file.open("savedData.dat", std::ios::out | std::ios::binary);
 	//see if the file is open, if not return error code 0 or false
-	if (!file.good())
-	{
-		std::cout << "File No Good Line 95 Game.cpp" << std::endl;
-		system("pause");
-		return 0;
-	}
-	//Move the writing position to the start of the save slot allocated memory
-	file.seekg(sizeof(Character), std::ios::beg);
+	/*if (!file.good())*/
+	//	return 0;
+	////Move the writing position to the start of the save slot allocated memory
+	//file.seekg(sizeof(Character), std::ios::beg);
 	//writes down player info
 	file.write((char*)&m_player1, sizeof(Character));
-	std::cout << "Line 103 Game.cpp File Written" << std::endl;
-	system("pause");
 	file.close();
 	return 1;
 }
@@ -112,15 +103,14 @@ int Game::loadData()
 	std::fstream file;
 	//open save data
 	file.open("savedData.dat", std::ios::in | std::ios::binary);
-	//see if the file is open, if not return error code 0 or false
-	if (!file.good())
-		return 1;
-	//Move the reading position to the start of the save slot allocated memory
-	file.seekp(sizeof(Character), std::ios::beg);
+	////see if the file is open, if not return error code 0 or false
+	//if (!file.good())
+	//	return 1;
+	////Move the reading position to the start of the save slot allocated memory
+	//file.seekp(sizeof(Character), std::ios::beg);
 	//writes down player info
+	file.seekp(0, std::ios::beg);
 	file.read((char*)&m_player1, sizeof(Character));
-	std::cout << "Line 122 Game.cpp" << std::endl;
-	system("pause");
 	file.close();
 	return 0;
 }
@@ -166,41 +156,7 @@ void Game::start()
 			loadData();
 			loadedSavedData = true;
 		}
-	}
-	
-	if (!loadedSavedData)
-	{
-		bool loop = true;
-		char answer[10];
-		bool answerAnswered = false;
-		char newName[10];
-
-		while (loop)
-		{
-			std::cout << "Player, What is Your Name?" << std::endl;
-			std::cin >> newName;
-			while (!answerAnswered)
-			{
-				std::cout << "You put " << newName << ", is this correct?" << std::endl;
-				std::cin >> answer;
-				if (answer[0] != 'y' && answer[0] != 'Y' && answer[0] != 'n' && answer[0] != 'N')
-				{
-					std::cout << "Please Enter Either Y or N";
-				}
-				else if (answer[0] == 'Y' || answer[0] == 'y')
-				{
-					answerAnswered = true;
-					loop = false;
-				}
-			}
-		}
-
-		for (int i = 0; i < 10; i++)
-		{
-			m_player1->setLetter(i, newName[i]);
-		}
-	}
-	
+	}	
 }
 
 void Game::draw()
